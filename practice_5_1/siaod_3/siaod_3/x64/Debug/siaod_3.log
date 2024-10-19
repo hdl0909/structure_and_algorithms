@@ -1,0 +1,5 @@
+﻿  siaod_3.cpp
+D:\DAN\proga\структуры и алгосы\practice_5_1\siaod_3\siaod_3\siaod_3.cpp(70,23): warning C4244: инициализация: преобразование "unsigned __int64" в "float", возможна потеря данных
+D:\DAN\proga\структуры и алгосы\practice_5_1\siaod_3\siaod_3\siaod_3.cpp(80,22): warning C4244: инициализация: преобразование "clock_t" в "float", возможна потеря данных
+D:\DAN\proga\структуры и алгосы\practice_5_1\siaod_3\siaod_3\siaod_3.cpp(82,20): warning C4244: инициализация: преобразование "clock_t" в "float", возможна потеря данных
+  siaod_3.vcxproj -> D:\DAN\proga\структуры и алгосы\practice_5_1\siaod_3\x64\Debug\siaod_3.exe

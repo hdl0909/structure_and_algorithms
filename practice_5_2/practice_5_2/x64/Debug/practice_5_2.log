@@ -1,0 +1,3 @@
+﻿  main.cpp
+D:\DAN\proga\структуры и алгосы\practice_5_2\practice_5_2\main.cpp(148,22): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+  practice_5_2.vcxproj -> D:\DAN\proga\структуры и алгосы\practice_5_2\x64\Debug\practice_5_2.exe
