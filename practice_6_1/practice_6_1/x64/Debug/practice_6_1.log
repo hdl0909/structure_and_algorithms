@@ -1,0 +1,6 @@
+﻿  main.cpp
+D:\DAN\proga\структуры и алгосы\practice_6_1\practice_6_1\main.cpp(40,28): warning C4244: аргумент: преобразование "unsigned __int64" в "unsigned int", возможна потеря данных
+D:\DAN\proga\структуры и алгосы\practice_6_1\practice_6_1\main.cpp(67,41): warning C4244: аргумент: преобразование "unsigned __int64" в "unsigned int", возможна потеря данных
+D:\DAN\proga\структуры и алгосы\practice_6_1\practice_6_1\main.cpp(88,28): warning C4244: аргумент: преобразование "unsigned __int64" в "unsigned int", возможна потеря данных
+D:\DAN\proga\структуры и алгосы\practice_6_1\practice_6_1\main.cpp(105,28): warning C4244: аргумент: преобразование "unsigned __int64" в "unsigned int", возможна потеря данных
+  practice_6_1.vcxproj -> D:\DAN\proga\структуры и алгосы\practice_6_1\x64\Debug\practice_6_1.exe

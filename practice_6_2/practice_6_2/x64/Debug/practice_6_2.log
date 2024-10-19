@@ -1,0 +1,4 @@
+﻿  main.cpp
+D:\DAN\proga\структуры и алгосы\practice_6_2\practice_6_2\main.cpp(69,13): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+D:\DAN\proga\структуры и алгосы\practice_6_2\practice_6_2\main.cpp(88,13): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+  practice_6_2.vcxproj -> D:\DAN\proga\структуры и алгосы\practice_6_2\x64\Debug\practice_6_2.exe
