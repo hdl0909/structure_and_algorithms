@@ -1,0 +1,8 @@
+﻿  main.cpp
+D:\DAN\proga\структуры и алгосы\practice_7_2\practice_7_2\main.cpp(158,38): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\DAN\proga\структуры и алгосы\practice_7_2\practice_7_2\main.cpp(163,37): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\DAN\proga\структуры и алгосы\practice_7_2\practice_7_2\main.cpp(171,38): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\DAN\proga\структуры и алгосы\practice_7_2\practice_7_2\main.cpp(175,37): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\DAN\proga\структуры и алгосы\practice_7_2\practice_7_2\main.cpp(239,36): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+D:\DAN\proga\структуры и алгосы\practice_7_2\practice_7_2\main.cpp(294,36): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+  practice_7_2.vcxproj -> D:\DAN\proga\структуры и алгосы\practice_7_2\x64\Debug\practice_7_2.exe
