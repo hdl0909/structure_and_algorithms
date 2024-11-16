@@ -5,7 +5,7 @@
 
 using namespace std;
 
-void bit_sort() { // Упражнение 2a
+void bit_sort() { // Г“ГЇГ°Г Г¦Г­ГҐГ­ГЁГҐ 2a
 	vector<int> numbers;
 
 	const int small_size = 8;
@@ -13,10 +13,10 @@ void bit_sort() { // Упражнение 2a
 
 	bool UseBigArray = false;
 
-	unsigned char smallBitArray = 0; // Для набора до 8-ми чисел (со значениями от 0 до 7)
-	unsigned long long bigBitArray = 0; // Для набора больше 8-ми чисел или значениями больше 7
+	unsigned char smallBitArray = 0; // Г„Г«Гї Г­Г ГЎГ®Г°Г  Г¤Г® 8-Г¬ГЁ Г·ГЁГ±ГҐГ« (Г±Г® Г§Г­Г Г·ГҐГ­ГЁГїГ¬ГЁ Г®ГІ 0 Г¤Г® 7)
+	unsigned long long bigBitArray = 0; // Г„Г«Гї Г­Г ГЎГ®Г°Г  ГЎГ®Г«ГјГёГҐ 8-Г¬ГЁ Г·ГЁГ±ГҐГ« ГЁГ«ГЁ Г§Г­Г Г·ГҐГ­ГЁГїГ¬ГЁ ГЎГ®Г«ГјГёГҐ 7
 
-	cout << "Введите число, чтобы завершить ввод, введите -1" << endl;
+	cout << "Г‚ГўГҐГ¤ГЁГІГҐ Г·ГЁГ±Г«Г®, Г·ГІГ®ГЎГ» Г§Г ГўГҐГ°ГёГЁГІГј ГўГўГ®Г¤, ГўГўГҐГ¤ГЁГІГҐ -1" << endl;
 	while (true) {
 		int num;
 		cin >> num;
@@ -37,31 +37,31 @@ void bit_sort() { // Упражнение 2a
 	}
 	if (UseBigArray) {
 		bitset<big_size> BigBitMask(bigBitArray);
-		cout << "Маска: ";
+		cout << "ГЊГ Г±ГЄГ : ";
 		for (int i = 0; i < big_size; ++i) {
-			cout << BigBitMask[i];  // Теперь выводим с нулевого индекса справа налево
+			cout << BigBitMask[i];  // Г’ГҐГЇГҐГ°Гј ГўГ»ГўГ®Г¤ГЁГ¬ Г± Г­ГіГ«ГҐГўГ®ГЈГ® ГЁГ­Г¤ГҐГЄГ±Г  Г±ГЇГ°Г ГўГ  Г­Г Г«ГҐГўГ®
 		}
 		cout << endl;
 	}
 	else {
 		bitset<small_size> smallBitMask(smallBitArray);
-		cout << "Маска: ";
+		cout << "ГЊГ Г±ГЄГ : ";
 		for (int i = 0; i < small_size; ++i) {
-			cout << smallBitMask[i];  // Теперь выводим с нулевого индекса справа налево
+			cout << smallBitMask[i];  // Г’ГҐГЇГҐГ°Гј ГўГ»ГўГ®Г¤ГЁГ¬ Г± Г­ГіГ«ГҐГўГ®ГЈГ® ГЁГ­Г¤ГҐГЄГ±Г  Г±ГЇГ°Г ГўГ  Г­Г Г«ГҐГўГ®
 		}
 		cout << endl;
 	}
 }
 
-void bit_sort_long() { // Упражнение 2b
-	vector<unsigned long long> VectorBit; // Массив для чисел превосходящие возможности разряжной сетки
+void bit_sort_long() { // Г“ГЇГ°Г Г¦Г­ГҐГ­ГЁГҐ 2b
+	vector<unsigned long long> VectorBit; // ГЊГ Г±Г±ГЁГў Г¤Г«Гї Г·ГЁГ±ГҐГ« ГЇГ°ГҐГўГ®Г±ГµГ®Г¤ГїГ№ГЁГҐ ГўГ®Г§Г¬Г®Г¦Г­Г®Г±ГІГЁ Г°Г Г§Г°ГїГ¦Г­Г®Г© Г±ГҐГІГЄГЁ
 	
 	const int big_size = 64;
 		
 	bool UseArray = false;
-	unsigned long long bigBitArray = 0; // Для чисел меньше 64
+	unsigned long long bigBitArray = 0; // Г„Г«Гї Г·ГЁГ±ГҐГ« Г¬ГҐГ­ГјГёГҐ 64
 
-	cout << "Введите число, чтобы завершить ввод, введите -1" << endl;
+	cout << "Г‚ГўГҐГ¤ГЁГІГҐ Г·ГЁГ±Г«Г®, Г·ГІГ®ГЎГ» Г§Г ГўГҐГ°ГёГЁГІГј ГўГўГ®Г¤, ГўГўГҐГ¤ГЁГІГҐ -1" << endl;
 	while (true) {
 		int num;
 		cin >> num;
@@ -71,7 +71,7 @@ void bit_sort_long() { // Упражнение 2b
 		if (num <= 63 && to_string(bigBitArray).size() <= 64) {
 			if (!UseArray) bigBitArray |= (1ULL << num);
 			else {
-				VectorBit[0] |= (1ULL << num); // устанавливаем бит с нужной позицией
+				VectorBit[0] |= (1ULL << num); // ГіГ±ГІГ Г­Г ГўГ«ГЁГўГ ГҐГ¬ ГЎГЁГІ Г± Г­ГіГ¦Г­Г®Г© ГЇГ®Г§ГЁГ¶ГЁГҐГ©
 			}
 		}
 		else {
@@ -79,16 +79,16 @@ void bit_sort_long() { // Упражнение 2b
 				VectorBit.push_back(bigBitArray);
 				UseArray = true;
 			}
-			int index = num / big_size; // определяем индекс вектора
+			int index = num / big_size; // Г®ГЇГ°ГҐГ¤ГҐГ«ГїГҐГ¬ ГЁГ­Г¤ГҐГЄГ± ГўГҐГЄГІГ®Г°Г 
 
 			if (index >= VectorBit.size()) {
 				VectorBit.resize(index + 1, 0);
 			}
-			VectorBit[index] |= (1ULL << num); // устанавливаем бит с нужной позицией
+			VectorBit[index] |= (1ULL << num); // ГіГ±ГІГ Г­Г ГўГ«ГЁГўГ ГҐГ¬ ГЎГЁГІ Г± Г­ГіГ¦Г­Г®Г© ГЇГ®Г§ГЁГ¶ГЁГҐГ©
 		}
 	}
 	if (UseArray) {
-		cout << "Маска: ";
+		cout << "ГЊГ Г±ГЄГ : ";
 		for (int i = 0; i < VectorBit.size(); i++) {
 			bitset<big_size> bigBitMask(VectorBit[i]);
 			for (int j = 0; j < big_size; j++) {
@@ -100,7 +100,7 @@ void bit_sort_long() { // Упражнение 2b
 	}
 	else {
 		bitset<big_size> bigBitMask(bigBitArray);
-		cout << "Маска: ";
+		cout << "ГЊГ Г±ГЄГ : ";
 		for (int i = 0; i < big_size; i++) {
 			cout << bigBitMask[i];
 		}
@@ -108,16 +108,16 @@ void bit_sort_long() { // Упражнение 2b
 	}
 }
 
-void bit_sort_long_char() { // Упражнение 2в
+void bit_sort_long_char() { // Г“ГЇГ°Г Г¦Г­ГҐГ­ГЁГҐ 2Гў
 	vector<vector <unsigned char>> VectorBit; 
 
 	const int big_size = 64;
 	const int small_size = 8;
 
 	bool UseArray = false;
-	vector<unsigned char> bigBitArray(small_size, 0); // Создаем вектор, содержащий 8 байтов и иницилизируем 0
+	vector<unsigned char> bigBitArray(small_size, 0); // Г‘Г®Г§Г¤Г ГҐГ¬ ГўГҐГЄГІГ®Г°, Г±Г®Г¤ГҐГ°Г¦Г Г№ГЁГ© 8 ГЎГ Г©ГІГ®Гў ГЁ ГЁГ­ГЁГ¶ГЁГ«ГЁГ§ГЁГ°ГіГҐГ¬ 0
 
-	cout << "Введите число, чтобы завершить ввод, введите -1" << endl;
+	cout << "Г‚ГўГҐГ¤ГЁГІГҐ Г·ГЁГ±Г«Г®, Г·ГІГ®ГЎГ» Г§Г ГўГҐГ°ГёГЁГІГј ГўГўГ®Г¤, ГўГўГҐГ¤ГЁГІГҐ -1" << endl;
 	while (true) {
 		int num;
 		cin >> num;
@@ -126,8 +126,8 @@ void bit_sort_long_char() { // Упражнение 2в
 		}
 		if (num <= 63 && bigBitArray.size() * small_size <= 64) {
 			if (!UseArray) {
-				int index = num / small_size; // определяем индекс внутри вектора
-				int bit_position = num % small_size; // опрeделяем позицию для установки бита
+				int index = num / small_size; // Г®ГЇГ°ГҐГ¤ГҐГ«ГїГҐГ¬ ГЁГ­Г¤ГҐГЄГ± ГўГ­ГіГІГ°ГЁ ГўГҐГЄГІГ®Г°Г 
+				int bit_position = num % small_size; // Г®ГЇГ°eГ¤ГҐГ«ГїГҐГ¬ ГЇГ®Г§ГЁГ¶ГЁГѕ Г¤Г«Гї ГіГ±ГІГ Г­Г®ГўГЄГЁ ГЎГЁГІГ 
 
 				bigBitArray[index] |= (1 << bit_position);
 			}
@@ -135,7 +135,7 @@ void bit_sort_long_char() { // Упражнение 2в
 				int index = num / small_size;
 				int bit_position = num % small_size;
 
-				VectorBit[0][index] |= (1 << bit_position); // устанавливаем бит с нужной позицией
+				VectorBit[0][index] |= (1 << bit_position); // ГіГ±ГІГ Г­Г ГўГ«ГЁГўГ ГҐГ¬ ГЎГЁГІ Г± Г­ГіГ¦Г­Г®Г© ГЇГ®Г§ГЁГ¶ГЁГҐГ©
 			}
 		}
 		else {
@@ -143,18 +143,18 @@ void bit_sort_long_char() { // Упражнение 2в
 				VectorBit.push_back(bigBitArray);
 				UseArray = true;
 			}
-			int index = num / big_size; // определяем индекс вектора
-			int ins_index = (num % big_size) / small_size;// определяем индекс для массива char
-			int bit_position = num % small_size; // позиция для установки бита
+			int index = num / big_size; // Г®ГЇГ°ГҐГ¤ГҐГ«ГїГҐГ¬ ГЁГ­Г¤ГҐГЄГ± ГўГҐГЄГІГ®Г°Г 
+			int ins_index = (num % big_size) / small_size;// Г®ГЇГ°ГҐГ¤ГҐГ«ГїГҐГ¬ ГЁГ­Г¤ГҐГЄГ± Г¤Г«Гї Г¬Г Г±Г±ГЁГўГ  char
+			int bit_position = num % small_size; // ГЇГ®Г§ГЁГ¶ГЁГї Г¤Г«Гї ГіГ±ГІГ Г­Г®ГўГЄГЁ ГЎГЁГІГ 
 
 			if (index >= VectorBit.size()) {
 				VectorBit.resize(index + 1, vector <unsigned char>(small_size, 0));
 			}
-			VectorBit[index][ins_index] |= (1 << bit_position); // устанавливаем бит с нужной позицией
+			VectorBit[index][ins_index] |= (1 << bit_position); // ГіГ±ГІГ Г­Г ГўГ«ГЁГўГ ГҐГ¬ ГЎГЁГІ Г± Г­ГіГ¦Г­Г®Г© ГЇГ®Г§ГЁГ¶ГЁГҐГ©
 		}
 	}
 	if (UseArray) {
-		cout << "Маска: ";
+		cout << "ГЊГ Г±ГЄГ : ";
 		for (int i = 0; i < VectorBit.size(); i++) {
 			for (int j = 0; j < small_size; j++) {
 				bitset<small_size> bigBitMask(VectorBit[i][j]);
@@ -166,7 +166,7 @@ void bit_sort_long_char() { // Упражнение 2в
 		cout << endl;
 	}
 	else {
-		cout << "Маска: ";
+		cout << "ГЊГ Г±ГЄГ : ";
 		for (int i = 0; i < small_size; i++) {
 			bitset<small_size> bigBitMask(bigBitArray[i]);
 			for (int j = 0; j < small_size; j++) {
