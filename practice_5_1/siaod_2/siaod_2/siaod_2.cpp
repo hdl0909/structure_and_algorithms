@@ -1,213 +1,186 @@
 #include <iostream>
-#include <fstream>
-#include <time.h>
-#include <string>
 #include <vector>
-#include <random>
-#include <algorithm>
+#include <string>
+#include <bitset>
 
 using namespace std;
 
-struct Enterprise {
-	unsigned short int key = 0;
-	string name, founder;
-};
+void bit_sort() { // Упражнение 2a
+	vector<int> numbers;
 
+	const int small_size = 8;
+	const int big_size = 64;
 
-// Функция для записи строки в бинарный файл
-void write_string(ofstream& file_out, const string& str) {
-	size_t length = str.size();
-	file_out.write(reinterpret_cast<const char*>(&length), sizeof(length));
-	file_out.write(str.c_str(), length);
-}
+	bool UseBigArray = false;
 
-// Функция для чтения строки из бинарного файла
-void read_string(ifstream& file_in, string& str) {
-	size_t length;
-	file_in.read(reinterpret_cast<char*>(&length), sizeof(length));
-	str.resize(length);
-	file_in.read(&str[0], length);
-}
+	unsigned char smallBitArray = 0; // Для набора до 8-ми чисел (со значениями от 0 до 7)
+	unsigned long long bigBitArray = 0; // Для набора больше 8-ми чисел или значениями больше 7
 
-// Задание 1 - создание бинарного файла
-void create_file(int count) {
-	ofstream file("data.txt");
-
-	if (!file.is_open()) {
-		cout << "Не удалось открыть файл";
-		return;
-	}
-
-	vector<unsigned short int> keys(count);
-	for (int i = 1; i < count + 1; i++) {
-		keys[i - 1] = i;
-	}
-
-	random_device rand;
-	default_random_engine dre(rand());
-	shuffle(keys.begin(), keys.end(), dre);
-
-	for (int i = 1; i < count + 1; i++) {
-		Enterprise e;
-		e.key = keys[i - 1];
-		e.name = "Предприятие_" + to_string(i);
-		e.founder = "Учредитель_" + to_string(i);
-
-		file << e.key << " " << e.name << " " << e.founder << endl;
-	}
-
-	file.close();
-
-	ifstream textFile("data.txt");
-	ofstream binFile("data.bin", ios::binary);
-
-	if (!textFile.is_open() or !binFile.is_open()) {
-		cout << "Не удалось открыть файл";
-		return;
-	}
-
-	while (textFile) {
-		Enterprise e;
-		textFile >> e.key >> e.name >> e.founder;
-
-		binFile.write(reinterpret_cast<char*>(&e.key), sizeof(e.key));
-		write_string(binFile, e.name);
-		write_string(binFile, e.founder);
-	}
-
-	textFile.close();
-	binFile.close();
-}
-
-// Задание 2 - Поиск в файле с применением линейного поиска
-void search_using_alg_lin(int key) {
-	auto start = clock();
-	bool Flag = false;
-	ifstream binFile("data.bin", ios::binary);
-	Enterprise e;
-
-	while (binFile.read(reinterpret_cast<char*>(&e.key), sizeof(e.key))) {
-		read_string(binFile, e.name);
-		read_string(binFile, e.founder);
-		if (e.key == key) {
-			Flag = true;
-			cout << "Key: " << e.key << " Name: " << e.name << " Founder: " << e.founder;
-			auto end = clock();
-			auto duration = (double)(end - start) / CLOCKS_PER_SEC;
-			cout << "\nTime: " << duration << " секунд\n";
-			binFile.close();
-			return;
-		}
-	}
-	if (!Flag) {
-		cout << "Такого элемента нету\n";
-	}
-	auto end = clock();
-	auto duration = (double)(end - start) / CLOCKS_PER_SEC;
-	cout << "\nTime: " << duration << " секунд\n";
-	binFile.close();
-	return;
-}
-
-// Функция создания таблицы, содержащую ключ и ссылку (смещение) на запись в файле и поиск ключа с помощью бинарного алгоритма
-// Функция создания таблицы для бинарного поиска
-vector<pair<unsigned short int, streampos>> create_table(int count) {
-	vector<pair<unsigned short int, streampos>> Table;
-	ifstream inFile("data.bin", ios::binary);
-	if (!inFile) {
-		cout << "Не удалось открыть файл\n";
-		return Table;
-	}
-	Enterprise e;
-	streampos position;
-	int i = 0;
-	while (inFile.read(reinterpret_cast<char*>(&e.key), sizeof(e.key))) {
-		read_string(inFile, e.name);
-		read_string(inFile, e.founder);
-		position = inFile.tellg();
-		Table.emplace_back(e.key, position - static_cast<streampos>(sizeof(e.key)) - static_cast<streampos>(e.name.size()) - 
-			static_cast<streampos>(e.founder.size()) - static_cast<streampos>(2 * sizeof(size_t)));
-		i++;
-		if (i == count) {
+	cout << "Введите число, чтобы завершить ввод, введите -1" << endl;
+	while (true) {
+		int num;
+		cin >> num;
+		if (num == -1) {
 			break;
 		}
-	}
-	inFile.close();
-
-	// Сортируем таблицу один раз
-	sort(Table.begin(), Table.end(), [](const pair<int, streampos>& a, const pair<int, streampos>& b) { return a.first < b.first; });
-
-	return Table;
-}
-
-// Функция бинарного поиска по отсортированной таблице
-void search_binary_algorithm(const vector<pair<unsigned short int, streampos>>& Table, unsigned short int key) {
-	auto start = clock();
-	
-	bool Flag = false;
-	int left = 0, right = Table.size() - 1;
-	int mid;
-	streampos link;
-	double duration;
-
-	// Бинарный поиск
-	while (left <= right) {
-		mid = (left + right) / 2;
-		if (Table[mid].first == key) {
-			link = Table[mid].second;
-			Flag = true;
-			auto end = clock();
-			duration = (double)(end - start) / CLOCKS_PER_SEC;
-			break;
-		}
-		if (Table[mid].first > key) {
-			right = mid - 1;
+		if (num <= 7 && to_string(smallBitArray).size() <= 8) {
+			if (!UseBigArray) smallBitArray |= (1 << num);
+			else bigBitArray |= (1ULL << num);
 		}
 		else {
-			left = mid + 1;
+			if (!UseBigArray) {
+				bigBitArray = smallBitArray;
+				UseBigArray = true;
+			}
+			bigBitArray |= (1ULL << num);
 		}
 	}
-
-	if (Flag) {
-		ifstream inFile("data.bin", ios::binary);
-		Enterprise e;
-
-		inFile.seekg(link, ios::beg);
-		inFile.read(reinterpret_cast<char*>(&e.key), sizeof(e.key));
-		read_string(inFile, e.name);
-		read_string(inFile, e.founder);
-
-		cout << "Key: " << e.key << " Name: " << e.name << " Founder: " << e.founder << endl;
-		cout << "Time: " << 0.001 << " секунд" << endl;
-		inFile.close();
+	if (UseBigArray) {
+		bitset<big_size> BigBitMask(bigBitArray);
+		cout << "Маска: ";
+		for (int i = 0; i < big_size; ++i) {
+			cout << BigBitMask[i];  // Теперь выводим с нулевого индекса справа налево
+		}
+		cout << endl;
 	}
 	else {
-		cout << "Нету такого элемента\n";
+		bitset<small_size> smallBitMask(smallBitArray);
+		cout << "Маска: ";
+		for (int i = 0; i < small_size; ++i) {
+			cout << smallBitMask[i];  // Теперь выводим с нулевого индекса справа налево
+		}
+		cout << endl;
+	}
+}
+
+void bit_sort_long() { // Упражнение 2b
+	vector<unsigned long long> VectorBit; // Массив для чисел превосходящие возможности разряжной сетки
+	
+	const int big_size = 64;
+		
+	bool UseArray = false;
+	unsigned long long bigBitArray = 0; // Для чисел меньше 64
+
+	cout << "Введите число, чтобы завершить ввод, введите -1" << endl;
+	while (true) {
+		int num;
+		cin >> num;
+		if (num == -1) {
+			break;
+		}
+		if (num <= 63 && to_string(bigBitArray).size() <= 64) {
+			if (!UseArray) bigBitArray |= (1ULL << num);
+			else {
+				VectorBit[0] |= (1ULL << num); // устанавливаем бит с нужной позицией
+			}
+		}
+		else {
+			if (!UseArray) {
+				VectorBit.push_back(bigBitArray);
+				UseArray = true;
+			}
+			int index = num / big_size; // определяем индекс вектора
+
+			if (index >= VectorBit.size()) {
+				VectorBit.resize(index + 1, 0);
+			}
+			VectorBit[index] |= (1ULL << num); // устанавливаем бит с нужной позицией
+		}
+	}
+	if (UseArray) {
+		cout << "Маска: ";
+		for (int i = 0; i < VectorBit.size(); i++) {
+			bitset<big_size> bigBitMask(VectorBit[i]);
+			for (int j = 0; j < big_size; j++) {
+				cout << bigBitMask[j];
+			}
+			cout << ":";
+		}
+		cout << endl;
+	}
+	else {
+		bitset<big_size> bigBitMask(bigBitArray);
+		cout << "Маска: ";
+		for (int i = 0; i < big_size; i++) {
+			cout << bigBitMask[i];
+		}
+		cout << endl;
+	}
+}
+
+void bit_sort_long_char() { // Упражнение 2в
+	vector<vector <unsigned char>> VectorBit; 
+
+	const int big_size = 64;
+	const int small_size = 8;
+
+	bool UseArray = false;
+	vector<unsigned char> bigBitArray(small_size, 0); // Создаем вектор, содержащий 8 байтов и иницилизируем 0
+
+	cout << "Введите число, чтобы завершить ввод, введите -1" << endl;
+	while (true) {
+		int num;
+		cin >> num;
+		if (num == -1) {
+			break;
+		}
+		if (num <= 63 && bigBitArray.size() * small_size <= 64) {
+			if (!UseArray) {
+				int index = num / small_size; // определяем индекс внутри вектора
+				int bit_position = num % small_size; // опрeделяем позицию для установки бита
+
+				bigBitArray[index] |= (1 << bit_position);
+			}
+			else {
+				int index = num / small_size;
+				int bit_position = num % small_size;
+
+				VectorBit[0][index] |= (1 << bit_position); // устанавливаем бит с нужной позицией
+			}
+		}
+		else {
+			if (!UseArray) {
+				VectorBit.push_back(bigBitArray);
+				UseArray = true;
+			}
+			int index = num / big_size; // определяем индекс вектора
+			int ins_index = (num % big_size) / small_size;// определяем индекс для массива char
+			int bit_position = num % small_size; // позиция для установки бита
+
+			if (index >= VectorBit.size()) {
+				VectorBit.resize(index + 1, vector <unsigned char>(small_size, 0));
+			}
+			VectorBit[index][ins_index] |= (1 << bit_position); // устанавливаем бит с нужной позицией
+		}
+	}
+	if (UseArray) {
+		cout << "Маска: ";
+		for (int i = 0; i < VectorBit.size(); i++) {
+			for (int j = 0; j < small_size; j++) {
+				bitset<small_size> bigBitMask(VectorBit[i][j]);
+				for (int k = 0; k < small_size; k++) {
+					cout << bigBitMask[k];
+				}
+			}
+		}
+		cout << endl;
+	}
+	else {
+		cout << "Маска: ";
+		for (int i = 0; i < small_size; i++) {
+			bitset<small_size> bigBitMask(bigBitArray[i]);
+			for (int j = 0; j < small_size; j++) {
+				cout << bigBitMask[j];
+			}
+		}
+		cout << endl;
 	}
 }
 
 int main() {
 	setlocale(LC_ALL, "ru");
-
-	cout << "Введите количество предприятий\n";
-	int count;
-	cin >> count;
-
-	// Создание бинарного файла с данными
-	create_file(count);
-
-	// Создание и сортировка таблицы ключей для бинарного поиска
-	vector<pair<unsigned short int, streampos>> Table = create_table(count);
-
-	unsigned short int key;
-	cout << "Введите ключ: ";
-	cin >> key;
-
-	// Поиск с использованием линейного поиска
-	search_using_alg_lin(key);
-
-	// Поиск с использованием бинарного поиска
-	search_binary_algorithm(Table, key);
-
+	bit_sort();
+	bit_sort_long();
+	bit_sort_long_char();
 	return 0;
 }
