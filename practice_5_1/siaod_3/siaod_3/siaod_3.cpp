@@ -11,7 +11,7 @@ using namespace std;
 const int MIN_NUMBER = 1000000;
 const int MAX_NUMBER = 9999999;
 const int SIZE = 1000000;
-const int SIZE_BIT_ARRAY = (MAX_NUMBER - MIN_NUMBER + 1); // Размер для битового массива
+const int SIZE_BIT_ARRAY = (MAX_NUMBER - MIN_NUMBER + 1); // Р Р°Р·РјРµСЂ РґР»СЏ Р±РёС‚РѕРІРѕРіРѕ РјР°СЃСЃРёРІР°
 
 int create_file() {
     vector<int> numbers;
@@ -23,9 +23,9 @@ int create_file() {
 
 //    numbers.resize(SIZE);
 
-    ofstream output_file("D:/DAN/proga/структуры и алгосы/practice_5_1/siaod_3/test.txt");
+    ofstream output_file("D:/DAN/proga/СЃС‚СЂСѓРєС‚СѓСЂС‹ Рё Р°Р»РіРѕСЃС‹/practice_5_1/siaod_3/test.txt");
     if (!output_file.is_open()) {
-        cerr << "Не удалось открыть файл";
+        cerr << "РќРµ СѓРґР°Р»РѕСЃСЊ РѕС‚РєСЂС‹С‚СЊ С„Р°Р№Р»";
         return 1;
     }
 
@@ -33,7 +33,7 @@ int create_file() {
         output_file << num << "\n";
     }
     output_file.close();
-    cout << "Файл создан\n";
+    cout << "Р¤Р°Р№Р» СЃРѕР·РґР°РЅ\n";
 
     return 0;
 }
@@ -41,9 +41,9 @@ int create_file() {
 int sort_file() {
     vector<unsigned char> bit_array(SIZE_BIT_ARRAY / 8, 0);
 
-    ifstream file_input("D:/DAN/proga/структуры и алгосы/practice_5_1/siaod_3/test.txt");
+    ifstream file_input("D:/DAN/proga/СЃС‚СЂСѓРєС‚СѓСЂС‹ Рё Р°Р»РіРѕСЃС‹/practice_5_1/siaod_3/test.txt");
     if (!file_input.is_open()) {
-        cerr << "Не удалось открыть файл";
+        cerr << "РќРµ СѓРґР°Р»РѕСЃСЊ РѕС‚РєСЂС‹С‚СЊ С„Р°Р№Р»";
         return 1;
     }
 
@@ -53,9 +53,9 @@ int sort_file() {
     }
     file_input.close();
 
-    ofstream file_output("D:/DAN/proga/структуры и алгосы/practice_5_1/siaod_3/test.txt");
+    ofstream file_output("D:/DAN/proga/СЃС‚СЂСѓРєС‚СѓСЂС‹ Рё Р°Р»РіРѕСЃС‹/practice_5_1/siaod_3/test.txt");
     if (!file_output.is_open()) {
-        cerr << "Не удалось открыть файл";
+        cerr << "РќРµ СѓРґР°Р»РѕСЃСЊ РѕС‚РєСЂС‹С‚СЊ С„Р°Р№Р»";
         return 1;
     }
 
@@ -66,9 +66,9 @@ int sort_file() {
     }
     file_output.close();
 
-    //Определение объема памяти, занимаемым битовым массивом
+    //РћРїСЂРµРґРµР»РµРЅРёРµ РѕР±СЉРµРјР° РїР°РјСЏС‚Рё, Р·Р°РЅРёРјР°РµРјС‹Рј Р±РёС‚РѕРІС‹Рј РјР°СЃСЃРёРІРѕРј
     float memory_size = bit_array.size() * sizeof(unsigned char);
-    cout << "Объем памяти, занимаемая битовым массивом " << memory_size / 1024 / 1024 << " МБ" << endl;
+    cout << "РћР±СЉРµРј РїР°РјСЏС‚Рё, Р·Р°РЅРёРјР°РµРјР°СЏ Р±РёС‚РѕРІС‹Рј РјР°СЃСЃРёРІРѕРј " << memory_size / 1024 / 1024 << " РњР‘" << endl;
 
     return 0;
 }
@@ -81,7 +81,7 @@ int main() {
     sort_file();
     float end_time = clock();
     float search_time = end_time - start_time;
-    cout << "Время выполнения программы: " << search_time / 1000 << " c" << endl;
+    cout << "Р’СЂРµРјСЏ РІС‹РїРѕР»РЅРµРЅРёСЏ РїСЂРѕРіСЂР°РјРјС‹: " << search_time / 1000 << " c" << endl;
 
     return 0;
 }
