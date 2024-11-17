@@ -18,8 +18,8 @@ struct PhoneOwner {
 
 struct HashTable {
 	vector<PhoneOwner*> table;
-	int size; // размер хэш-таблицы
-	int count; // количество элементов в хэш-таблице
+	int size; // СЂР°Р·РјРµСЂ С…СЌС€-С‚Р°Р±Р»РёС†С‹
+	int count; // РєРѕР»РёС‡РµСЃС‚РІРѕ СЌР»РµРјРµРЅС‚РѕРІ РІ С…СЌС€-С‚Р°Р±Р»РёС†Рµ
 	vector<bool>deleted;
 
 	HashTable(int s) : size(s), count(0) {
@@ -31,7 +31,7 @@ struct HashTable {
 		return numberPhone % size;
 	}
 
-	void insertItem(unsigned long long numberPhone, const string& adress) { // функция для вставки
+	void insertItem(unsigned long long numberPhone, const string& adress) { // С„СѓРЅРєС†РёСЏ РґР»СЏ РІСЃС‚Р°РІРєРё
 		if ((float(count) / float(size)) > 0.75) {
 			resizeTable();
 		}
@@ -40,11 +40,11 @@ struct HashTable {
 		int index = hashFunction(numberPhone, size);
 		int i = 0;
 
-		// квадратичное пробирование для разрешения коллизий
+		// РєРІР°РґСЂР°С‚РёС‡РЅРѕРµ РїСЂРѕР±РёСЂРѕРІР°РЅРёРµ РґР»СЏ СЂР°Р·СЂРµС€РµРЅРёСЏ РєРѕР»Р»РёР·РёР№
 		while (table[index] != nullptr && i < size) {
 			if (table[index]->numberPhone == numberPhone) {
 				table[index]->adress = adress;
-				cout << "Запись обновлена по номеру " << numberPhone << " Индекс: " << index << endl;
+				cout << "Р—Р°РїРёСЃСЊ РѕР±РЅРѕРІР»РµРЅР° РїРѕ РЅРѕРјРµСЂСѓ " << numberPhone << " РРЅРґРµРєСЃ: " << index << endl;
 			}
 			index = (index + i * i) % size;
 			i++;
@@ -53,13 +53,13 @@ struct HashTable {
 		table[index] = new PhoneOwner{ numberPhone, adress };
 		count++;
 		deleted[index] = false;
-		cout << "Запись добавлена, Номер телефона: " << numberPhone << " Адрес: " << adress << " Индекс: " << index << endl;
+		cout << "Р—Р°РїРёСЃСЊ РґРѕР±Р°РІР»РµРЅР°, РќРѕРјРµСЂ С‚РµР»РµС„РѕРЅР°: " << numberPhone << " РђРґСЂРµСЃ: " << adress << " РРЅРґРµРєСЃ: " << index << endl;
 	}
 
-	void resizeTable() { // Функция для расширения таблицы
-		cout << "Расширение таблицы...\n";
+	void resizeTable() { // Р¤СѓРЅРєС†РёСЏ РґР»СЏ СЂР°СЃС€РёСЂРµРЅРёСЏ С‚Р°Р±Р»РёС†С‹
+		cout << "Р Р°СЃС€РёСЂРµРЅРёРµ С‚Р°Р±Р»РёС†С‹...\n";
 		int newSize = size * 2;
-		cout << "Новый размер таблицы: " << newSize << endl;
+		cout << "РќРѕРІС‹Р№ СЂР°Р·РјРµСЂ С‚Р°Р±Р»РёС†С‹: " << newSize << endl;
 		vector<PhoneOwner*> newTable(newSize, nullptr);
 
 		for (int i = 0; i < size; i++) {
@@ -67,21 +67,21 @@ struct HashTable {
 				int newIndex = hashFunction(table[i]->numberPhone, newSize);
 				int j = 0;
 				
-				// квадратичное пробирование для разрешения коллизий
+				// РєРІР°РґСЂР°С‚РёС‡РЅРѕРµ РїСЂРѕР±РёСЂРѕРІР°РЅРёРµ РґР»СЏ СЂР°Р·СЂРµС€РµРЅРёСЏ РєРѕР»Р»РёР·РёР№
 				while (newTable[newIndex] != nullptr && j < newSize) {
 					newIndex = (newIndex + j * j) % newSize;
 					j++;
 				}
 
 				newTable[newIndex] = table[i];
-				cout << "Элемент с номером телефона: " << table[i]->numberPhone << " Перемещен на индекс: " << newIndex << endl;
+				cout << "Р­Р»РµРјРµРЅС‚ СЃ РЅРѕРјРµСЂРѕРј С‚РµР»РµС„РѕРЅР°: " << table[i]->numberPhone << " РџРµСЂРµРјРµС‰РµРЅ РЅР° РёРЅРґРµРєСЃ: " << newIndex << endl;
 			}
 		}
 		size = newSize;
 		table = move(newTable);
 		deleted.resize(newSize, false);
 
-		cout << "Процесс расширения завершен\n";
+		cout << "РџСЂРѕС†РµСЃСЃ СЂР°СЃС€РёСЂРµРЅРёСЏ Р·Р°РІРµСЂС€РµРЅ\n";
 	}
 
 	PhoneOwner* searchItem(unsigned long long numberPhone) {
@@ -97,7 +97,7 @@ struct HashTable {
 			i++;
 		}
 
-		cout << "Элемент не найден\n";
+		cout << "Р­Р»РµРјРµРЅС‚ РЅРµ РЅР°Р№РґРµРЅ\n";
 		return nullptr;
 	}
 
@@ -107,12 +107,12 @@ struct HashTable {
 
 		while (table[index] != nullptr && i < size) {
 			if (table[index]->numberPhone == numberPhone) {
-				cout << "Удаляется элемент с номером телефона: " << table[index]->numberPhone << " и адресом: " << table[index]->adress << endl;
+				cout << "РЈРґР°Р»СЏРµС‚СЃСЏ СЌР»РµРјРµРЅС‚ СЃ РЅРѕРјРµСЂРѕРј С‚РµР»РµС„РѕРЅР°: " << table[index]->numberPhone << " Рё Р°РґСЂРµСЃРѕРј: " << table[index]->adress << endl;
 				delete table[index];
 				table[index] = nullptr;
 				deleted[index] = true;
 				count--;
-				cout << "Элемент удален\n";
+				cout << "Р­Р»РµРјРµРЅС‚ СѓРґР°Р»РµРЅ\n";
 				return;
 			}
 
@@ -120,40 +120,40 @@ struct HashTable {
 			i++;
 		}
 
-		cout << "Такого элемента нету\n";
+		cout << "РўР°РєРѕРіРѕ СЌР»РµРјРµРЅС‚Р° РЅРµС‚Сѓ\n";
 		return;
 	}
 
 	void print() { 
-		cout << "Хеш-таблица:\n";
+		cout << "РҐРµС€-С‚Р°Р±Р»РёС†Р°:\n";
 		for (int i = 0; i < size; i++) {
 			if (table[i] != nullptr) {
-				cout << "Индекс: " << i << " Номер телефона: " << table[i]->numberPhone << " Адрес: " << table[i]->adress << endl;
+				cout << "РРЅРґРµРєСЃ: " << i << " РќРѕРјРµСЂ С‚РµР»РµС„РѕРЅР°: " << table[i]->numberPhone << " РђРґСЂРµСЃ: " << table[i]->adress << endl;
 			}
 			else {
-				cout << "Индекс " << i << " пусто\n";
+				cout << "РРЅРґРµРєСЃ " << i << " РїСѓСЃС‚Рѕ\n";
 			}
 		}
 	}
 
 	void autoInitialization() {
-		insertItem(89220959431, "Москва, ул.Ленина, 16");
-		insertItem(89856588535, "Москва, 11-ая Парковая, 36");
-		insertItem(89686898990, "Губкинский, 14 мкр, 23");
-		insertItem(89535667543, "Москва, Улица Баумана, 43");
-		insertItem(89456676834, "Зеленоград, Георгиевский проспект, 33");
-		insertItem(89356686443, "Туймазы, Улица Комарова, 35");
+		insertItem(89220959431, "РњРѕСЃРєРІР°, СѓР».Р›РµРЅРёРЅР°, 16");
+		insertItem(89856588535, "РњРѕСЃРєРІР°, 11-Р°СЏ РџР°СЂРєРѕРІР°СЏ, 36");
+		insertItem(89686898990, "Р“СѓР±РєРёРЅСЃРєРёР№, 14 РјРєСЂ, 23");
+		insertItem(89535667543, "РњРѕСЃРєРІР°, РЈР»РёС†Р° Р‘Р°СѓРјР°РЅР°, 43");
+		insertItem(89456676834, "Р—РµР»РµРЅРѕРіСЂР°Рґ, Р“РµРѕСЂРіРёРµРІСЃРєРёР№ РїСЂРѕСЃРїРµРєС‚, 33");
+		insertItem(89356686443, "РўСѓР№РјР°Р·С‹, РЈР»РёС†Р° РљРѕРјР°СЂРѕРІР°, 35");
 	}
 };
 
 void print_comand() {
-	cout << "Доступные команды\n";
-	cout << "1. insert <номер телефона> <адрес> - Добавить элемент в хеш-таблицу\n";
-	cout << "2. search <номер телефона> - найти элемент хеш-таблицы по ключу\n";
-	cout << "3. remove <номер телефона> - удалить элемент хеш-таблицы по ключу\n";
-	cout << "4. print - вывести все элменты хеш-таблицы\n";
-	cout << "5. help - вывести список команд\n";
-	cout << "6. exit - завершить работу программы\n";
+	cout << "Р”РѕСЃС‚СѓРїРЅС‹Рµ РєРѕРјР°РЅРґС‹\n";
+	cout << "1. insert <РЅРѕРјРµСЂ С‚РµР»РµС„РѕРЅР°> <Р°РґСЂРµСЃ> - Р”РѕР±Р°РІРёС‚СЊ СЌР»РµРјРµРЅС‚ РІ С…РµС€-С‚Р°Р±Р»РёС†Сѓ\n";
+	cout << "2. search <РЅРѕРјРµСЂ С‚РµР»РµС„РѕРЅР°> - РЅР°Р№С‚Рё СЌР»РµРјРµРЅС‚ С…РµС€-С‚Р°Р±Р»РёС†С‹ РїРѕ РєР»СЋС‡Сѓ\n";
+	cout << "3. remove <РЅРѕРјРµСЂ С‚РµР»РµС„РѕРЅР°> - СѓРґР°Р»РёС‚СЊ СЌР»РµРјРµРЅС‚ С…РµС€-С‚Р°Р±Р»РёС†С‹ РїРѕ РєР»СЋС‡Сѓ\n";
+	cout << "4. print - РІС‹РІРµСЃС‚Рё РІСЃРµ СЌР»РјРµРЅС‚С‹ С…РµС€-С‚Р°Р±Р»РёС†С‹\n";
+	cout << "5. help - РІС‹РІРµСЃС‚Рё СЃРїРёСЃРѕРє РєРѕРјР°РЅРґ\n";
+	cout << "6. exit - Р·Р°РІРµСЂС€РёС‚СЊ СЂР°Р±РѕС‚Сѓ РїСЂРѕРіСЂР°РјРјС‹\n";
 }
 
 int main() {
@@ -168,7 +168,7 @@ int main() {
 
 
 	while (true) {
-		cout << "Введите команду\n";
+		cout << "Р’РІРµРґРёС‚Рµ РєРѕРјР°РЅРґСѓ\n";
 		cin >> comand;
 		if (comand == "insert") {
 			unsigned long long numberPhone;
@@ -181,7 +181,7 @@ int main() {
 		else if (comand == "search") {
 			unsigned long long numberPhone;
 			cin >> numberPhone;
-			cout << "Номер телефона: " << hashTable.searchItem(numberPhone)->numberPhone << " Адрес: " << 
+			cout << "РќРѕРјРµСЂ С‚РµР»РµС„РѕРЅР°: " << hashTable.searchItem(numberPhone)->numberPhone << " РђРґСЂРµСЃ: " << 
 				hashTable.searchItem(numberPhone)->adress << endl;
 		}
 		else if (comand == "remove") {
@@ -199,7 +199,7 @@ int main() {
 			break;
 		}
 		else {
-			cout << "Введена неверная команда\n";
+			cout << "Р’РІРµРґРµРЅР° РЅРµРІРµСЂРЅР°СЏ РєРѕРјР°РЅРґР°\n";
 			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 		}
 	}
