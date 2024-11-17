@@ -8,8 +8,8 @@
 
 using namespace std;
 
-const int p = 31; // основание полинома
-const int q = 9973; // большое простое число
+const int p = 31; // РѕСЃРЅРѕРІР°РЅРёРµ РїРѕР»РёРЅРѕРјР°
+const int q = 9973; // Р±РѕР»СЊС€РѕРµ РїСЂРѕСЃС‚РѕРµ С‡РёСЃР»Рѕ
 					
 
 
@@ -47,29 +47,29 @@ void CreateFile() {
 	ofstream file("text.txt");
 	
 	if (!file.is_open()) {
-		cerr << "Не удалось открыть файл\n";
+		cerr << "РќРµ СѓРґР°Р»РѕСЃСЊ РѕС‚РєСЂС‹С‚СЊ С„Р°Р№Р»\n";
 		return;
 	}
 
 	if (file.is_open()) {
 		string pattern;
-		cout << "Введите подстроку длиной не более 17 символов\n";
+		cout << "Р’РІРµРґРёС‚Рµ РїРѕРґСЃС‚СЂРѕРєСѓ РґР»РёРЅРѕР№ РЅРµ Р±РѕР»РµРµ 17 СЃРёРјРІРѕР»РѕРІ\n";
 		cin >> pattern;
 		while (pattern.size() > 17) {
-			cout << "Подстрока превышает длину\nВведите подстроку длиной не более 17 символов\n";
+			cout << "РџРѕРґСЃС‚СЂРѕРєР° РїСЂРµРІС‹С€Р°РµС‚ РґР»РёРЅСѓ\nР’РІРµРґРёС‚Рµ РїРѕРґСЃС‚СЂРѕРєСѓ РґР»РёРЅРѕР№ РЅРµ Р±РѕР»РµРµ 17 СЃРёРјРІРѕР»РѕРІ\n";
 			cin >> pattern;
 		}
 		cin.ignore();
 		file << pattern << endl;
 
 		int length;
-		cout << "Введите длину текста\n";
+		cout << "Р’РІРµРґРёС‚Рµ РґР»РёРЅСѓ С‚РµРєСЃС‚Р°\n";
 		cin >> length;
 
 		srand(time(0));
 		for (size_t i = 0; i < length; i++) {
 			char randomChar;
-			int randomValue = rand() % 27; // так как 26 букв и пробел
+			int randomValue = rand() % 27; // С‚Р°Рє РєР°Рє 26 Р±СѓРєРІ Рё РїСЂРѕР±РµР»
 			if (randomValue < 26) {
 				randomChar = 'a' + randomValue;
 				file << randomChar;
@@ -98,7 +98,7 @@ long long CalcHash(const string& str) {
 int CntSearchFileWord() {
 	ifstream file("text.txt");
 	if (!file.is_open()) {
-		cerr << "Не удалось открыть файл\n";
+		cerr << "РќРµ СѓРґР°Р»РѕСЃСЊ РѕС‚РєСЂС‹С‚СЊ С„Р°Р№Р»\n";
 		return -1;
 	}
 	int count = 0;
@@ -111,10 +111,10 @@ int CntSearchFileWord() {
 		return 0;
 	}
 
-	long long hash_pattern = CalcHash(pattern); // Хеш шаблона
-	long long current_hash = CalcHash(text.substr(0, pattern.size())); // Хеш первой подстроки
+	long long hash_pattern = CalcHash(pattern); // РҐРµС€ С€Р°Р±Р»РѕРЅР°
+	long long current_hash = CalcHash(text.substr(0, pattern.size())); // РҐРµС€ РїРµСЂРІРѕР№ РїРѕРґСЃС‚СЂРѕРєРё
 
-	long long pow_p_minus = 1;
+	long long pow_p_minus = 1; 
 	for (int i = 1; i < pattern.size(); i++) {
 		pow_p_minus = (pow_p_minus * p) % q;
 	}
@@ -128,7 +128,7 @@ int CntSearchFileWord() {
 		current_hash = (current_hash * p) % q;
 		current_hash = (current_hash + (text[i + pattern.size() - 1] - 'a' + 1)) % q;
 
-		// Проверка совпадения хешей и строки
+		// РџСЂРѕРІРµСЂРєР° СЃРѕРІРїР°РґРµРЅРёСЏ С…РµС€РµР№ Рё СЃС‚СЂРѕРєРё
 		if (current_hash == hash_pattern && text.substr(i, pattern.size()) == pattern) {
 			count++;
 		}
@@ -146,7 +146,7 @@ int main() {
 	/*string text;
 
 	while (true) {
-		cout << "Введите текст\n";
+		cout << "Р’РІРµРґРёС‚Рµ С‚РµРєСЃС‚\n";
 		getline(cin, text);
 
 		if (text == "exit") break;
@@ -154,12 +154,12 @@ int main() {
 		vector<string> arrayWords = FuncArrayWords(text);
 
 		string pattern;
-		cout << "Введите подстроку\n";
+		cout << "Р’РІРµРґРёС‚Рµ РїРѕРґСЃС‚СЂРѕРєСѓ\n";
 		getline(cin, pattern);
 		vector<string> result = FuncSearchArrayWords(arrayWords, pattern);
 
 		if (result.empty()) {
-			cout << "Ничего не найдено\n";
+			cout << "РќРёС‡РµРіРѕ РЅРµ РЅР°Р№РґРµРЅРѕ\n";
 		}
 		else {
 			for (string word : result) {
@@ -170,7 +170,7 @@ int main() {
 	} */
 
 	CreateFile();
-	cout << "Количество вхождений в тексте " << CntSearchFileWord() << endl;
+	cout << "РљРѕР»РёС‡РµСЃС‚РІРѕ РІС…РѕР¶РґРµРЅРёР№ РІ С‚РµРєСЃС‚Рµ " << CntSearchFileWord() << endl;
 
 	return 0;
 }
