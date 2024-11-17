@@ -197,65 +197,65 @@ public:
 
 
 void listCommand() {
-	cout << "\nÑïèñîê êîìàíä: " << endl
-		<< " - Âñòàâêà ýëåìåíòà (1)" << endl
-		<< " - Ñèììåòðè÷íûé îáõîä (2)" << endl
-		<< " - Îáõîä â øèðèíó (3)" << endl
-		<< " - Ñðåäíåå àðèôìåòè÷åñêîå óçëîâ (4)" << endl
-		<< " - Äëèíà ïóòè îò êîðíÿ äî çàäàííîãî çíà÷åíèÿ (5)" << endl
-		<< " - Âûâîä äåðåâà (6)" << endl
-		<< " - Äëÿ âûõîäà íàæìèòå 0" << endl << endl;
+	cout << "\nÐ¡Ð¿Ð¸ÑÐ¾Ðº ÐºÐ¾Ð¼Ð°Ð½Ð´: " << endl
+		<< " - Ð’ÑÑ‚Ð°Ð²ÐºÐ° ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð° (1)" << endl
+		<< " - Ð¡Ð¸Ð¼Ð¼ÐµÑ‚Ñ€Ð¸Ñ‡Ð½Ñ‹Ð¹ Ð¾Ð±Ñ…Ð¾Ð´ (2)" << endl
+		<< " - ÐžÐ±Ñ…Ð¾Ð´ Ð² ÑˆÐ¸Ñ€Ð¸Ð½Ñƒ (3)" << endl
+		<< " - Ð¡Ñ€ÐµÐ´Ð½ÐµÐµ Ð°Ñ€Ð¸Ñ„Ð¼ÐµÑ‚Ð¸Ñ‡ÐµÑÐºÐ¾Ðµ ÑƒÐ·Ð»Ð¾Ð² (4)" << endl
+		<< " - Ð”Ð»Ð¸Ð½Ð° Ð¿ÑƒÑ‚Ð¸ Ð¾Ñ‚ ÐºÐ¾Ñ€Ð½Ñ Ð´Ð¾ Ð·Ð°Ð´Ð°Ð½Ð½Ð¾Ð³Ð¾ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ñ (5)" << endl
+		<< " - Ð’Ñ‹Ð²Ð¾Ð´ Ð´ÐµÑ€ÐµÐ²Ð° (6)" << endl
+		<< " - Ð”Ð»Ñ Ð²Ñ‹Ñ…Ð¾Ð´Ð° Ð½Ð°Ð¶Ð¼Ð¸Ñ‚Ðµ 0" << endl << endl;
 }
 
 int main() {
 	setlocale(LC_ALL, "ru");
 
 	int root;
-	cout << "Ââåäèòå çíà÷åíèå êîðíÿ\n";
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ ÐºÐ¾Ñ€Ð½Ñ\n";
 	cin >> root;
 	RedBlackTree tree(root);
 
 	int startCountNodes;
 	int value;
-	cout << "Ââåäèòå êîëè÷åñòâî ýëåìåíòîâ äëÿ çàïîëíåíèÿ äåðåâà\n";
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÐºÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð¾Ð² Ð´Ð»Ñ Ð·Ð°Ð¿Ð¾Ð»Ð½ÐµÐ½Ð¸Ñ Ð´ÐµÑ€ÐµÐ²Ð°\n";
 	cin >> startCountNodes;
 	for (int i = 0; i < startCountNodes; i++) {
-		cout << "Ââåäèòå ýëåìåíò: ";
+		cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚: ";
 		cin >> value;
 		tree.insertNode(value);
 	}
 
-	listCommand(); \
+	listCommand(); 
 	int command;
 	while (true) {
-		cout << "Êîìàíäà: ";
+		cout << "ÐšÐ¾Ð¼Ð°Ð½Ð´Ð°: ";
 		cin >> command;
 		switch (command)
 		{
 		case 0: return 0;
 		case 1:
 			int insValue;
-			cout << "Ââåäèòå ýëåìåíò: ";
+			cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚: ";
 			cin >> insValue;
 			tree.insertNode(insValue);
 			break;
 		case 2:
-			cout << "Ñèììåòðè÷íûé îáõîä: ";
+			cout << "Ð¡Ð¸Ð¼Ð¼ÐµÑ‚Ñ€Ð¸Ñ‡Ð½Ñ‹Ð¹ Ð¾Ð±Ñ…Ð¾Ð´: ";
 			tree.symmetricalBypass(tree.root);
 			break;
 		case 3:
-			cout << "Îáõîä â øèðèíó: ";
+			cout << "ÐžÐ±Ñ…Ð¾Ð´ Ð² ÑˆÐ¸Ñ€Ð¸Ð½Ñƒ: ";
 			tree.widthBypass(tree.root);
 			break;
 		case 4:
-			cout << "Ñðåäíåå àðèôìåòè÷åñêîå óçëîâ: ";
+			cout << "Ð¡Ñ€ÐµÐ´Ð½ÐµÐµ Ð°Ñ€Ð¸Ñ„Ð¼ÐµÑ‚Ð¸Ñ‡ÐµÑÐºÐ¾Ðµ ÑƒÐ·Ð»Ð¾Ð²: ";
 			cout << tree.averageNodes(tree.root);
 			break;
 		case 5:
 			int lengthValue;
-			cout << "Ââåäèòå ýëåìåíò, äëÿ êîòîðîãî õîòèòå ïîäñ÷èòàòü ïóòü: ";
+			cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚, Ð´Ð»Ñ ÐºÐ¾Ñ‚Ð¾Ñ€Ð¾Ð³Ð¾ Ñ…Ð¾Ñ‚Ð¸Ñ‚Ðµ Ð¿Ð¾Ð´ÑÑ‡Ð¸Ñ‚Ð°Ñ‚ÑŒ Ð¿ÑƒÑ‚ÑŒ: ";
 			cin >> lengthValue;
-			cout << "Äëèíà ïóòè: ";
+			cout << "Ð”Ð»Ð¸Ð½Ð° Ð¿ÑƒÑ‚Ð¸: ";
 			cout << tree.lengthNode(lengthValue);
 			break;
 		case 6:
