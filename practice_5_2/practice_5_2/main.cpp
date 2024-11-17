@@ -14,14 +14,14 @@ struct Enterprise {
 };
 
 
-// Функция для записи строки в бинарный файл
+// Р¤СѓРЅРєС†РёСЏ РґР»СЏ Р·Р°РїРёСЃРё СЃС‚СЂРѕРєРё РІ Р±РёРЅР°СЂРЅС‹Р№ С„Р°Р№Р»
 void write_string(ofstream& file_out, const string& str) {
 	size_t length = str.size();
 	file_out.write(reinterpret_cast<const char*>(&length), sizeof(length));
 	file_out.write(str.c_str(), length);
 }
 
-// Функция для чтения строки из бинарного файла
+// Р¤СѓРЅРєС†РёСЏ РґР»СЏ С‡С‚РµРЅРёСЏ СЃС‚СЂРѕРєРё РёР· Р±РёРЅР°СЂРЅРѕРіРѕ С„Р°Р№Р»Р°
 void read_string(ifstream& file_in, string& str) {
 	size_t length;
 	file_in.read(reinterpret_cast<char*>(&length), sizeof(length));
@@ -29,12 +29,12 @@ void read_string(ifstream& file_in, string& str) {
 	file_in.read(&str[0], length);
 }
 
-// Задание 1 - создание бинарного файла
+// Р—Р°РґР°РЅРёРµ 1 - СЃРѕР·РґР°РЅРёРµ Р±РёРЅР°СЂРЅРѕРіРѕ С„Р°Р№Р»Р°
 void create_file(int count) {
 	ofstream file("data.txt");
 
 	if (!file.is_open()) {
-		cout << "Не удалось открыть файл";
+		cout << "РќРµ СѓРґР°Р»РѕСЃСЊ РѕС‚РєСЂС‹С‚СЊ С„Р°Р№Р»";
 		return;
 	}
 
@@ -50,8 +50,8 @@ void create_file(int count) {
 	for (int i = 1; i < count + 1; i++) {
 		Enterprise e;
 		e.key = keys[i - 1];
-		e.name = "Предприятие_" + to_string(i);
-		e.founder = "Учредитель_" + to_string(i);
+		e.name = "РџСЂРµРґРїСЂРёСЏС‚РёРµ_" + to_string(i);
+		e.founder = "РЈС‡СЂРµРґРёС‚РµР»СЊ_" + to_string(i);
 
 		file << e.key << " " << e.name << " " << e.founder << endl;
 	}
@@ -62,7 +62,7 @@ void create_file(int count) {
 	ofstream binFile("data.bin", ios::binary);
 
 	if (!textFile.is_open() or !binFile.is_open()) {
-		cout << "Не удалось открыть файл";
+		cout << "РќРµ СѓРґР°Р»РѕСЃСЊ РѕС‚РєСЂС‹С‚СЊ С„Р°Р№Р»";
 		return;
 	}
 
@@ -79,7 +79,7 @@ void create_file(int count) {
 	binFile.close();
 }
 
-// Задание 2 - Поиск в файле с применением линейного поиска
+// Р—Р°РґР°РЅРёРµ 2 - РџРѕРёСЃРє РІ С„Р°Р№Р»Рµ СЃ РїСЂРёРјРµРЅРµРЅРёРµРј Р»РёРЅРµР№РЅРѕРіРѕ РїРѕРёСЃРєР°
 void search_using_alg_lin(int key) {
 	auto start = clock();
 	bool Flag = false;
@@ -94,28 +94,28 @@ void search_using_alg_lin(int key) {
 			cout << "Key: " << e.key << " Name: " << e.name << " Founder: " << e.founder;
 			auto end = clock();
 			auto duration = (double)(end - start) / CLOCKS_PER_SEC;
-			cout << "\nTime: " << duration << " секунд\n";
+			cout << "\nTime: " << duration << " СЃРµРєСѓРЅРґ\n";
 			binFile.close();
 			return;
 		}
 	}
 	if (!Flag) {
-		cout << "Такого элемента нету\n";
+		cout << "РўР°РєРѕРіРѕ СЌР»РµРјРµРЅС‚Р° РЅРµС‚Сѓ\n";
 	}
 	auto end = clock();
 	auto duration = (double)(end - start) / CLOCKS_PER_SEC;
-	cout << "\nTime: " << duration << " секунд\n";
+	cout << "\nTime: " << duration << " СЃРµРєСѓРЅРґ\n";
 	binFile.close();
 	return;
 }
 
-// Функция создания таблицы, содержащую ключ и ссылку (смещение) на запись в файле и поиск ключа с помощью бинарного алгоритма
-// Функция создания таблицы для бинарного поиска
+// Р¤СѓРЅРєС†РёСЏ СЃРѕР·РґР°РЅРёСЏ С‚Р°Р±Р»РёС†С‹, СЃРѕРґРµСЂР¶Р°С‰СѓСЋ РєР»СЋС‡ Рё СЃСЃС‹Р»РєСѓ (СЃРјРµС‰РµРЅРёРµ) РЅР° Р·Р°РїРёСЃСЊ РІ С„Р°Р№Р»Рµ Рё РїРѕРёСЃРє РєР»СЋС‡Р° СЃ РїРѕРјРѕС‰СЊСЋ Р±РёРЅР°СЂРЅРѕРіРѕ Р°Р»РіРѕСЂРёС‚РјР°
+// Р¤СѓРЅРєС†РёСЏ СЃРѕР·РґР°РЅРёСЏ С‚Р°Р±Р»РёС†С‹ РґР»СЏ Р±РёРЅР°СЂРЅРѕРіРѕ РїРѕРёСЃРєР°
 vector<pair<unsigned short int, streampos>> create_table(int count) {
 	vector<pair<unsigned short int, streampos>> Table;
 	ifstream inFile("data.bin", ios::binary);
 	if (!inFile) {
-		cout << "Не удалось открыть файл\n";
+		cout << "РќРµ СѓРґР°Р»РѕСЃСЊ РѕС‚РєСЂС‹С‚СЊ С„Р°Р№Р»\n";
 		return Table;
 	}
 	Enterprise e;
@@ -134,13 +134,13 @@ vector<pair<unsigned short int, streampos>> create_table(int count) {
 	}
 	inFile.close();
 
-	// Сортируем таблицу один раз
+	// РЎРѕСЂС‚РёСЂСѓРµРј С‚Р°Р±Р»РёС†Сѓ РѕРґРёРЅ СЂР°Р·
 	sort(Table.begin(), Table.end(), [](const pair<int, streampos>& a, const pair<int, streampos>& b) { return a.first < b.first; });
 
 	return Table;
 }
 
-// Функция бинарного поиска по отсортированной таблице
+// Р¤СѓРЅРєС†РёСЏ Р±РёРЅР°СЂРЅРѕРіРѕ РїРѕРёСЃРєР° РїРѕ РѕС‚СЃРѕСЂС‚РёСЂРѕРІР°РЅРЅРѕР№ С‚Р°Р±Р»РёС†Рµ
 void search_binary_algorithm(const vector<pair<unsigned short int, streampos>>& Table, unsigned short int key) {
 	auto start = clock();
 	
@@ -150,7 +150,7 @@ void search_binary_algorithm(const vector<pair<unsigned short int, streampos>>& 
 	streampos link;
 	double duration;
 
-	// Бинарный поиск
+	// Р‘РёРЅР°СЂРЅС‹Р№ РїРѕРёСЃРє
 	while (left <= right) {
 		mid = (left + right) / 2;
 		if (Table[mid].first == key) {
@@ -178,36 +178,37 @@ void search_binary_algorithm(const vector<pair<unsigned short int, streampos>>& 
 		read_string(inFile, e.founder);
 
 		cout << "Key: " << e.key << " Name: " << e.name << " Founder: " << e.founder << endl;
-		cout << "Time: " << 0.001 << " секунд" << endl;
+		cout << "Time: " << 0.001 << " СЃРµРєСѓРЅРґ" << endl;
 		inFile.close();
 	}
 	else {
-		cout << "Нету такого элемента\n";
+		cout << "РќРµС‚Сѓ С‚Р°РєРѕРіРѕ СЌР»РµРјРµРЅС‚Р°\n";
 	}
 }
 
 int main() {
 	setlocale(LC_ALL, "ru");
 
-	cout << "Введите количество предприятий\n";
+	cout << "Р’РІРµРґРёС‚Рµ РєРѕР»РёС‡РµСЃС‚РІРѕ РїСЂРµРґРїСЂРёСЏС‚РёР№\n";
 	int count;
 	cin >> count;
 
-	// Создание бинарного файла с данными
+	// РЎРѕР·РґР°РЅРёРµ Р±РёРЅР°СЂРЅРѕРіРѕ С„Р°Р№Р»Р° СЃ РґР°РЅРЅС‹РјРё
 	create_file(count);
 
-	// Создание и сортировка таблицы ключей для бинарного поиска
+	// РЎРѕР·РґР°РЅРёРµ Рё СЃРѕСЂС‚РёСЂРѕРІРєР° С‚Р°Р±Р»РёС†С‹ РєР»СЋС‡РµР№ РґР»СЏ Р±РёРЅР°СЂРЅРѕРіРѕ РїРѕРёСЃРєР°
 	vector<pair<unsigned short int, streampos>> Table = create_table(count);
 
 	unsigned short int key;
-	cout << "Введите ключ: ";
+	cout << "Р’РІРµРґРёС‚Рµ РєР»СЋС‡: ";
 	cin >> key;
 
-	// Поиск с использованием линейного поиска
+	// РџРѕРёСЃРє СЃ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµРј Р»РёРЅРµР№РЅРѕРіРѕ РїРѕРёСЃРєР°
 	search_using_alg_lin(key);
 
-	// Поиск с использованием бинарного поиска
+	// РџРѕРёСЃРє СЃ РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРµРј Р±РёРЅР°СЂРЅРѕРіРѕ РїРѕРёСЃРєР°
 	search_binary_algorithm(Table, key);
 
 	return 0;
 }
+ 
