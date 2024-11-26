@@ -1,0 +1,4 @@
+﻿  Huffman.cpp
+F:\my_files\works\structure and algo\practice_8_1\practice_8_1\practice_8_1\Huffman.cpp(25,11): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+ShannonFano.obj : error LNK2005: main уже определен в Huffman.obj
+F:\my_files\works\structure and algo\practice_8_1\practice_8_1\x64\Debug\practice_8_1.exe : fatal error LNK1169: обнаружен многократно определенный символ - один или более
